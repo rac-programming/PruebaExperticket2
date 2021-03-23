@@ -1,0 +1,22 @@
+﻿<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-2">
+            <MatIconButton Icon="home" Link="/" Style="color:white;"></MatIconButton>
+        </li>
+        <li class="nav-item px-2">
+            <MatIconButton Icon="supervised_user_circle" Link="/personas" Style="color:white;"></MatIconButton>
+
+        </li>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

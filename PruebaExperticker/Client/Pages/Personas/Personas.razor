@@ -1,0 +1,62 @@
+﻿@page "/personas"
+@inject NavigationManager nav
+@inject HttpClient Http
+@inject IMatDialogService MatDialogService
+
+<style>
+    .mdc-circular-progress--large {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+
+
+<h2>Personas</h2>
+<div class="row justify-content-end">
+    <MatButton OnClick="@OpenAddPersonaDialog" Raised="true">Añadir</MatButton>
+</div>
+@if (loading)
+{
+    <div class="d-flex h-100 w-100 align-items-center justify-content-center">
+        <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Large" />
+    </div>
+
+}
+else
+{
+<div class="row justify-content-center w-100">
+    <MatTable Items="@personas" class="mat-elevation-z5" UseSortHeaderRow="true">
+        <MatTableHeader>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Sexo</th>
+            <th>Fecha de nacimiento</th>
+            <th>Dirección</th>
+            <th>País</th>
+            <th>Código Postal</th>
+            <th></th>
+            <th></th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>@context.Nombre</td>
+            <td>@context.Apellidos</td>
+            <td>@context.DNI</td>
+            <td>@context.Sexo</td>
+            <td>@string.Format("{0:dd/MM/yyyy}", @context.FechaNacimiento)</td>
+            <td>@context.Direccion</td>
+            <td>@context.Pais</td>
+            <td>@context.CodigoPostal</td>
+            <td><MatIconButton Icon="delete" OnClick="@(()=>Borrar(context.DNI))"></MatIconButton></td>
+            <td><MatIconButton Icon="edit" OnClick="@(()=>OpenUpdatePersonaDialog(context.DNI))"></MatIconButton></td>
+        </MatTableRow>
+    </MatTable>
+</div>
+    }
+
+
+
+
+@code {
+
+}

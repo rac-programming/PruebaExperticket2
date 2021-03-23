@@ -1,0 +1,74 @@
+﻿@page "/personas/add"
+@using System.Net.Http
+@inject NavigationManager nav
+@inject HttpClient Http
+@inject IMatDialogService MatDialogService
+
+<MatDialogContent>
+    <EditForm Model="@persona" OnValidSubmit="@Submit">
+        <DataAnnotationsValidator />
+        <div class="d-block">
+            <h2 class="mt-0">Añadir Persona</h2>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 ">
+                <div class="d-block">
+                    <MatTextField Label="Nombre" @bind-Value="persona.Nombre" Class="w-100" />
+                    <ValidationMessage For="@(() => persona.Nombre)" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-block">
+                    <MatTextField Label="Apellidos" @bind-Value="persona.Apellidos" Class="w-100" />
+                    <ValidationMessage For="@(() => persona.Apellidos)" />
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <div class="d-block">
+                    <MatTextField Label="DNI" @bind-Value="persona.DNI" Class="w-100" />
+                    <ValidationMessage For="@(() => persona.DNI)" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-block">
+                    <MatSelectItem Label="Sexo" @bind-Value="persona.Sexo" Class="w-100" Items="@(new[] { "Hombre", "Mujer" })" />
+                    <ValidationMessage For="@(() => persona.Sexo)" />
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <div class="d-block mt-2">
+                    <MatTextField Label="Dirección" @bind-Value="persona.Direccion" Class="w-100" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-block mt-2">
+                    <MatTextField Label="Código Postal" @bind-Value="persona.CodigoPostal" Class="w-100" />
+                </div>
+            </div>
+        </div>
+        <div class="d-block mt-2">
+            <MatDatePicker Label="Fecha de nacimiento" @bind-Value="persona.FechaNacimiento" Class="w-100"></MatDatePicker>
+            @*<ValidationMessage For="@(() => persona.FechaNacimiento)" />*@
+        </div>
+        <div class="d-flex justify-content-center align-items-center" style="height:30px;">
+            <MatProgressCircle Indeterminate="@loading" Size="MatProgressCircleSize.Medium" />
+            <div class="validation-message">@error</div>
+        </div>
+        <div class="row justify-content-center mt-1">
+            <MatButton Type="submit" Raised="true" Disabled="loading" Class="mr-2">
+                Añadir
+            </MatButton>
+            <MatButton Outlined="true" Disabled="loading" OnClick="@(_ => CloseDialog())">
+                Cancelar
+            </MatButton>
+        </div>
+    </EditForm>
+</MatDialogContent>
+
+@code {
+
+}
